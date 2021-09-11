@@ -37,18 +37,16 @@ variable "oas30" {
   type        = string
   default     = null
 }
-variable "log_retention_in_days_dev" {
-  description = "cloudwatch log retention in days for development stage."
-  type = number
-  default = 7
-}
-variable "log_retention_in_days_st" {
-  description = "cloudwatch log retention in days for staging stage."
-  type = number
-  default = 7
-}
-variable "log_retention_in_days_pro" {
-  description = "cloudwatch log retention in days for production stage."
-  type = number
-  default = 30
+variable "log_retention_in_days" {
+  description = "cloudwatch log retention in days for development, staging and production stages."
+  type = object({
+    dev = number
+    st = number
+    pro = number
+  })
+  default = {
+    dev = 7
+    st = 7
+    pro = 30
+  }
 }
