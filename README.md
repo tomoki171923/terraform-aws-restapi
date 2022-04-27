@@ -2,7 +2,7 @@
 <!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
 **Table of Contents**
 
-- [terraform-apigateway-restapi](#terraform-apigateway-restapi)
+- [terraform-aws-restapi](#terraform-aws-restapi)
   - [For User](#for-user)
     - [Usage](#usage)
   - [For Contributor](#for-contributor)
