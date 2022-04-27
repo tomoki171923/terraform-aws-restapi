@@ -10,7 +10,7 @@
 
 <!-- END doctoc generated TOC please keep comment here to allow auto update -->
 
-# terraform-apigateway-restapi
+# terraform-aws-restapi
 
 Terraform module, which creates AWS apigateway restapi resources invoking lambda function.
 
