@@ -103,6 +103,7 @@ resource "aws_api_gateway_method_settings" "this" {
 }
 resource "aws_cloudwatch_log_group" "this" {
   for_each          = local.stages
-  name              = "API-Gateway-Execution-Logs_${aws_api_gateway_rest_api.this.name}_${aws_api_gateway_rest_api.this.id}/${each.key}"
+  name              = "API-Gateway-Execution-Logs_${aws_api_gateway_rest_api.this.id}/${each.key}"
   retention_in_days = each.value.log_retention_in_days
+  depends_on        = [aws_api_gateway_method_settings.this]
 }
