@@ -41,12 +41,12 @@ variable "log_retention_in_days" {
   description = "cloudwatch log retention in days for development, staging and production stages."
   type = object({
     dev = number
-    st = number
+    st  = number
     pro = number
   })
   default = {
     dev = 7
-    st = 7
+    st  = 7
     pro = 30
   }
 }

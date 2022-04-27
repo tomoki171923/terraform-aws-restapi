@@ -1,7 +1,10 @@
 # terraform-apigateway-restapi
+
 Terraform module, which creates AWS apigateway restapi resources invoking lambda function.
 
-## Usage
+## For User
+
+### Usage
 
 ~~~
 module "rest_api" {
@@ -18,4 +21,13 @@ module "rest_api" {
 data "template_file" "oas30-apigateway" {
   template = file("${path.module}/oas30-apigateway.yaml")
 }
+~~~
+
+## For Contributor
+
+### set pre-commit
+
+~~~
+brew install pre-commit
+pre-commit install
 ~~~
