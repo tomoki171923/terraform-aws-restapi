@@ -42,11 +42,9 @@
 #       with:
 #         cli_config_credentials_token: ${{ secrets.TF_API_TOKEN }}
 
-name: 'Terraform'
+name: 'CI'
 
 on:
-  push:
-    branches: [ main, dev ]
   pull_request:
     branches: [ main, dev ]
 
