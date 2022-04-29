@@ -2,6 +2,8 @@
 
 Terraform module, which creates simple RestAPI invoking lambda function on Amazon API Gateway.
 
+[Terraform Registry](https://registry.terraform.io/modules/tomoki171923/restapi/aws/latest)
+
 ## Usage
 
 Please set the variable "is_first_deploy"  true when the first deployment.
@@ -10,7 +12,8 @@ e.g. the first deployment.
 
 ```terraform
 module "rest_api" {
-  source   = "git::https://github.com/tomoki171923/terraform-aws-restapi.git?ref=v0.2.0"
+  # source   = "git::https://github.com/tomoki171923/terraform-aws-restapi.git?ref=v0.2.2"
+  source  = "tomoki171923/restapi/aws"
   api_name = "your_rest_api_name"
   methods = [
     {
@@ -34,7 +37,8 @@ e.g. from the second time onwards.
 
 ```terraform
 module "rest_api" {
-  source   = "git::https://github.com/tomoki171923/terraform-aws-restapi.git?ref=v0.2.0"
+  # source   = "git::https://github.com/tomoki171923/terraform-aws-restapi.git?ref=v0.2.2"
+  source  = "tomoki171923/restapi/aws"
   api_name = "your_rest_api_name"
   methods = [
     {
