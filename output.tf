@@ -2,11 +2,7 @@ output "rest_api" {
   value = aws_api_gateway_rest_api.this
 }
 output "deployments" {
-  value = {
-    dev = aws_api_gateway_deployment.dev
-    st  = aws_api_gateway_deployment.st
-    pro = aws_api_gateway_deployment.pro
-  }
+  value = aws_api_gateway_deployment.this
 }
 output "stages" {
   value = aws_api_gateway_stage.this

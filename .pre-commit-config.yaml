@@ -22,7 +22,7 @@ repos:
   hooks:
     - id: markdownlint
       # ignore line length of makrdownlint
-      args: [-r, ~MD013]
+      args: [-s, .markdownlint.rb]
 
 # ------------------------------------------------
 # check Terraform file

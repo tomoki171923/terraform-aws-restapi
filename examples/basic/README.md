@@ -1,60 +1,16 @@
-# terraform-aws-restapi
+# Complete Simple REST API
 
-Terraform module, which creates simple RestAPI invoking lambda function on Amazon API Gateway.
+Configuration in this directory creates simple RestAPI invoking lambda function on Amazon API Gateway.
 
 ## Usage
 
-Please set the variable "is_first_deploy"  true when the first deployment.
+To run this example you need to execute:
 
-e.g. the first deployment.
-
-```terraform
-module "rest_api" {
-  source   = "git::https://github.com/tomoki171923/terraform-aws-restapi.git?ref=v0.2.0"
-  api_name = "your_rest_api_name"
-  methods = [
-    {
-      name          = "GET"
-      path          = "get-item"
-      lambda_function_name = "your_lambda_function_name_to_invoke_from_api"
-    }
-  ]
-  stage_name = "deployment_stage_name"
-  oas30      = data.template_file.oas30-apigateway.rendered
-  is_first_deploy = true
-}
-data "template_file" "oas30-apigateway" {
-  template = file("${path.module}/oas30-apigateway.yaml")
-}
+```bash
+terraform init
+terraform plan
+terraform apply
 ```
-
-Please set the variable "is first deploy" false from the second time onwards.
-
-e.g. from the second time onwards.
-
-```terraform
-module "rest_api" {
-  source   = "git::https://github.com/tomoki171923/terraform-aws-restapi.git?ref=v0.2.0"
-  api_name = "your_rest_api_name"
-  methods = [
-    {
-      name          = "GET"
-      path          = "get-item"
-      lambda_function_name = "your_lambda_function_name_to_invoke_from_api"
-    }
-  ]
-  stage_name = "deployment_stage_name"
-  oas30      = data.template_file.oas30-apigateway.rendered
-  is_first_deploy = false
-}
-data "template_file" "oas30-apigateway" {
-  template = file("${path.module}/oas30-apigateway.yaml")
-}
-```
-
-## Examples
-
-TBD
 
 ## Requirements
 
