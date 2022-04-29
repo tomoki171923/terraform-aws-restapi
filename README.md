@@ -54,7 +54,7 @@ data "template_file" "oas30-apigateway" {
 
 ## Examples
 
-TBD
+* [basic](https://github.com/tomoki171923/terraform-aws-restapi/tree/main/examples/basic/)
 
 ## Requirements
 
@@ -77,7 +77,7 @@ TBD
 | methods | REST API's methods. name: api method name, path: api method path, lambda_function_name: aws lambda function name. | <pre>list(object({<br>    name                 = string<br>    path                 = string<br>    lambda_function_name = string<br>}))</pre> | `[]` | yes |
 | stages | REST API's stages. name: stage name, description: deployment description, log_retention: cloudwatch log retention in days. | <pre>list(object({<br>    name          = string<br>    description   = string<br>    log_retention = number<br>}))</pre> |<pre>[<br>  {<br>    name          = "dev", <br>    description   = "development deployment", <br>    log_retention = 7, <br>  }, <br>  {<br>    name          = "st", <br>    description   = "staging deployment", <br>    log_retention = 30, <br>  }, <br>  {<br>    name          = "pro", <br>    description   = "production deployment", <br>    log_retention = 60, <br>  }, <br>]</pre>| no |
 | stage\_name | The target stage name to update. | `string` | `""` | yes |
-| oas30 | OpenAPI 3 + API Gateway Extensions (JSON syntax) | `string` | `""` | no |
+| oas30 | OpenAPI 3 + API Gateway Extensions (JSON syntax) | `string` | `""` | yes |
 
 ## Outputs
 
