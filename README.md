@@ -17,7 +17,6 @@ e.g. the first deployment.
 
 ```terraform
 module "rest_api" {
-  # source   = "git::https://github.com/tomoki171923/terraform-aws-restapi.git?ref=v0.2.2"
   source  = "tomoki171923/restapi/aws"
   api_name = "your_rest_api_name"
   methods = [
@@ -28,11 +27,12 @@ module "rest_api" {
     }
   ]
   stage_name = "deployment_stage_name"
-  oas30      = data.template_file.oas30-apigateway.rendered
+  oas30 = templatefile("./sample-oas30-apigateway.yaml",
+    {
+      integration_url = "arn:aws:apigateway:${data.aws_region.current.name}:lambda:path/2015-03-31/functions/${data.aws_lambda_function.this.arn}:$${stageVariables.LambdaAlias}/invocations"
+    }
+  )
   is_first_deploy = true
-}
-data "template_file" "oas30-apigateway" {
-  template = file("${path.module}/oas30-apigateway.yaml")
 }
 ```
 
@@ -42,7 +42,6 @@ e.g. from the second time onwards.
 
 ```terraform
 module "rest_api" {
-  # source   = "git::https://github.com/tomoki171923/terraform-aws-restapi.git?ref=v0.2.2"
   source  = "tomoki171923/restapi/aws"
   api_name = "your_rest_api_name"
   methods = [
@@ -53,11 +52,12 @@ module "rest_api" {
     }
   ]
   stage_name = "deployment_stage_name"
-  oas30      = data.template_file.oas30-apigateway.rendered
+  oas30 = templatefile("./sample-oas30-apigateway.yaml",
+    {
+      integration_url = "arn:aws:apigateway:${data.aws_region.current.name}:lambda:path/2015-03-31/functions/${data.aws_lambda_function.this.arn}:$${stageVariables.LambdaAlias}/invocations"
+    }
+  )
   is_first_deploy = false
-}
-data "template_file" "oas30-apigateway" {
-  template = file("${path.module}/oas30-apigateway.yaml")
 }
 ```
 
