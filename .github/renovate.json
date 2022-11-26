@@ -1,0 +1,60 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "branchConcurrentLimit": 10,
+  "extends": [
+    "config:base"
+  ],
+  "ignorePresets": [
+    ":prHourlyLimit2"
+  ],
+  "labels": [
+    "renovate"
+  ],
+  "packageRules": [
+    {
+      "addLabels": [
+        "terraform-version"
+      ],
+      "groupName": "terraform",
+      "matchPackageNames": [
+        "hashicorp/terraform"
+      ]
+    },
+    {
+      "addLabels": [
+        "terraform-aws-provider-version"
+      ],
+      "groupName": "hashicorp/aws",
+      "matchPackageNames": [
+        "aws"
+      ]
+    },
+    {
+      "addLabels": [
+        "terraform-aws-modules-version"
+      ],
+      "groupName": "terraform-aws-modules",
+      "matchPackagePrefixes": [
+        "terraform-aws-modules"
+      ]
+    },
+    {
+      "addLabels": [
+        "github-actions-version"
+      ],
+      "groupName": "github-actions",
+      "matchPackagePrefixes": [
+        "actions-modules"
+      ]
+    }
+  ],
+  "patch": {
+    "automerge": true
+  },
+  "prConcurrentLimit": 10,
+  "schedule": [
+    "after 1am on saturday",
+    "before 5am on saturday"
+  ],
+  "timezone": "Asia/Tokyo"
+}
