@@ -21,7 +21,7 @@ locals {
 resource "aws_api_gateway_rest_api" "this" {
   name = var.api_name
   endpoint_configuration {
-    types = ["REGIONAL"]
+    types = [var.endpoint_type]
   }
   body = var.oas30
   tags = merge(local.tags, local.deploy_flag)

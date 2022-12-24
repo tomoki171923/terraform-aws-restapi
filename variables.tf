@@ -2,6 +2,11 @@ variable "api_name" {
   description = "rest api name on aws apigateway"
   type        = string
 }
+variable "endpoint_type" {
+  description = "rest api endpoint type"
+  type        = string
+  default     = "REGIONAL"
+}
 variable "methods" {
   description = "name: api method name, path: api method path, lambda_function_name: aws lambda function name."
   type = list(
