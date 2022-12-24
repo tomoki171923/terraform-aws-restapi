@@ -6,10 +6,24 @@ Terraform module, which creates simple RestAPI invoking lambda function on Amazo
 
 ## Usage
 
-Need to create Lambda alias with the same name as API Gateway stage.
+It is necessary to grant write permission to CloudWatchLogs to the APIGateway account for each region in the IAM Role in advance.
+
 e.g.
-Lambda Alias : `dev`
-API Gateway Stages : `dev`
+
+```terraform
+data "aws_iam_role" "ApigatewayCloudwatchLogsWrite" {
+  name = "ApigatewayCloudwatchLogsWrite"
+}
+resource "aws_api_gateway_account" "account" {
+  cloudwatch_role_arn = data.aws_iam_role.ApigatewayCloudwatchLogsWrite.arn
+}
+```
+
+A Lambda alias must be created with the same name as the API Gateway stage.
+e.g.
+
+* Lambda Alias : `dev`
+* API Gateway Stage : `dev`
 
 Please set the variable "is_first_deploy" true when the first deployment.
 
@@ -83,6 +97,7 @@ module "rest_api" {
 | Name       | Description                                                                                                                | Type                                                                                                  | Default                                                                                                                                                                                                                                                                                                                         | Required |
 | ---------- | -------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :------: |
 | api_name   | The REST API's name on Amazon API Gateway                                                                                  | `string` | `""` |   yes    |
+| endpoint_type   | The REST API's endpoint type on Amazon API Gateway                                                                                  | `string` | `"REGIONAL"` |   no    |
 | methods    | REST API's methods. name: api method name, path: api method path, lambda_function_name: aws lambda function name.          | <pre>list(object({<br> name = string<br> path = string<br> lambda_function_name = string<br>}))</pre> | `[]` |   yes    |
 | stages     | REST API's stages. name: stage name, description: deployment description, log_retention: cloudwatch log retention in days. | <pre>list(object({<br> name = string<br> description = string<br> log_retention = number<br>}))</pre> | <pre>[<br> {<br> name = "dev", <br> description = "development deployment", <br> log_retention = 7, <br> }, <br> {<br> name = "st", <br> description = "staging deployment", <br> log_retention = 30, <br> }, <br> {<br> name = "pro", <br> description = "production deployment", <br> log_retention = 60, <br> }, <br>]</pre> |    no    |
 | stage_name | The target stage name to update.                                                                                           | `string` | `""` |   yes    |
