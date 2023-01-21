@@ -78,6 +78,7 @@ module "rest_api" {
 ## Examples
 
 * [basic](https://github.com/tomoki171923/terraform-aws-restapi/tree/main/examples/basic/)
+* [custom_domain_edge](https://github.com/tomoki171923/terraform-aws-restapi/tree/main/examples/custom_domain_edge/)
 
 ## Requirements
 
