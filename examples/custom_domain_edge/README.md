@@ -1,6 +1,6 @@
-# Complete Simple REST API
+# Complete Custom Domain REST API (Edge Optimized)
 
-Configuration in this directory creates simple RestAPI invoking lambda function on Amazon API Gateway.
+Configuration in this directory creates Custom Domain RestAPI invoking lambda function on Amazon API Gateway.
 
 ## Usage
 

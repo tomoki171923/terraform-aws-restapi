@@ -16,3 +16,6 @@ output "methods" {
 output "log_groups" {
   value = aws_cloudwatch_log_group.this
 }
+output "custom_domain_edge" {
+  value = module.custom_domain_edge
+}

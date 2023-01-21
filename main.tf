@@ -21,7 +21,7 @@ locals {
 resource "aws_api_gateway_rest_api" "this" {
   name = var.api_name
   endpoint_configuration {
-    types = ["REGIONAL"]
+    types = [var.endpoint_type]
   }
   body = var.oas30
   tags = merge(local.tags, local.deploy_flag)
@@ -142,4 +142,15 @@ resource "aws_cloudwatch_log_group" "this" {
     API       = aws_api_gateway_rest_api.this.name
     Stage     = each.value.name
   }
+}
+
+/*
+  custom domain name
+*/
+module "custom_domain_edge" {
+  count               = var.custom_domain_names_edge == null ? 0 : 1
+  source              = "./modules/custom_domain_edge"
+  rest_api_id         = aws_api_gateway_rest_api.this.id
+  custom_domain_names = var.custom_domain_names_edge
+  tags                = local.tags
 }
