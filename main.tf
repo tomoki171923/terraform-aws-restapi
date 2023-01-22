@@ -117,31 +117,29 @@ resource "aws_lambda_permission" "this" {
   cloudwatch logs
 */
 resource "aws_api_gateway_method_settings" "this" {
-  for_each    = { for s in var.stages : s.name => s.name }
+  for_each = { for s in var.stages : s.name => {
+    logging_level = s.logging_level
+    }
+  }
   rest_api_id = aws_api_gateway_rest_api.this.id
   stage_name  = each.key
   method_path = "*/*"
-
   settings {
     metrics_enabled = false
-    logging_level   = "INFO"
+    logging_level   = each.value.logging_level
   }
   depends_on = [aws_cloudwatch_log_group.this, aws_api_gateway_stage.this]
 }
 resource "aws_cloudwatch_log_group" "this" {
   for_each = {
-    for key in var.stages : key.name => {
-      name          = key.name
-      log_retention = key.log_retention
+    for s in var.stages : s.name => {
+      name          = s.name
+      log_retention = s.log_retention
     }
   }
   name              = "API-Gateway-Execution-Logs_${aws_api_gateway_rest_api.this.id}/${each.value.name}"
   retention_in_days = each.value.log_retention
-  tags = {
-    Terraform = "true"
-    API       = aws_api_gateway_rest_api.this.name
-    Stage     = each.value.name
-  }
+  tags              = merge(local.tags, { Stage = each.value.name })
 }
 
 /*

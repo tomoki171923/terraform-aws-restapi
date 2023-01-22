@@ -18,7 +18,7 @@ variable "methods" {
   )
 }
 variable "stages" {
-  description = "name: stage name, description: deployment description, log_retention: cloudwatch log retention in days."
+  description = "name: stage name, description: deployment description, logging_level: cloudwatch logging level, log_retention: cloudwatch log retention in days."
   type = list(
     object({
       name          = string
@@ -30,16 +30,19 @@ variable "stages" {
     {
       name          = "dev",
       description   = "development deployment",
+      logging_level = "INFO",
       log_retention = 7,
     },
     {
       name          = "st",
       description   = "staging deployment",
+      logging_level = "INFO",
       log_retention = 30,
     },
     {
       name          = "pro",
       description   = "production deployment",
+      logging_level = "INFO",
       log_retention = 60,
     }
   ]
