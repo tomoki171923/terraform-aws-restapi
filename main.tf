@@ -153,14 +153,3 @@ module "custom_domain_edge" {
   custom_domain_names = var.custom_domain_names_edge
   tags                = local.tags
 }
-
-/*
-  custom domain name
-*/
-module "custom_domain_edge" {
-  count               = var.custom_domain_names_edge == null ? 0 : 1
-  source              = "./modules/custom_domain_edge"
-  rest_api_id         = aws_api_gateway_rest_api.this.id
-  custom_domain_names = var.custom_domain_names_edge
-  tags                = local.tags
-}
